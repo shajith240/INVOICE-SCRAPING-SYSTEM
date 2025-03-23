@@ -1,0 +1,18 @@
+{
+    "test_data": {
+        "input_dir": "tests/samples/input",
+        "output_dir": "tests/samples/output",
+        "temp_dir": "tests/samples/temp"
+    },
+    "test_files": {
+        "pdf": "sample_invoice.pdf",
+        "image": "sample_invoice.jpg",
+        "email": "sample_email.eml"
+    },
+    "mock_responses": {
+        "vendor_name": "Test Company Ltd",
+        "invoice_number": "INV-2024-001",
+        "total_amount": "1000.00",
+        "date": "2024-03-15"
+    }
+}

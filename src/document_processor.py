@@ -1,9 +1,16 @@
 from pathlib import Path
+from typing import Dict, List, Optional
+from copy import deepcopy
+import logging
+from datetime import datetime
+import json
+from pathlib import Path
 import shutil
 import logging
 from typing import Dict, Optional, List
 from datetime import datetime
 import json
+from copy import deepcopy
 
 from .categorizer import DocumentCategorizer
 from .exceptions import ProcessingError
@@ -219,6 +226,127 @@ class DocumentProcessor:
         date = datetime.now().strftime('%Y-%m-%d')
         # Use absolute path
         return self.processed_dir / category / date
+
+    def apply(self, file_path: Path, metadata: Optional[Dict] = None) -> Dict:
+        """
+        Apply document processing while preserving all indicators and metadata
+        
+        Args:
+            file_path: Path to the document
+            metadata: Optional metadata dictionary
+            
+        Returns:
+            Dict containing processed results with all indicators preserved
+        """
+        try:
+            # Load and validate document
+            doc = self._load_document(file_path)
+            
+            # Create deep copy of original metadata to preserve all indicators
+            preserved_metadata = deepcopy(metadata) if metadata else {}
+            
+            # Extract text while preserving formatting and structure
+            extracted_text = self._extract_text_with_formatting(doc)
+            
+            # Process document while maintaining all indicators
+            processed_result = {
+                'text': extracted_text,
+                'original_metadata': preserved_metadata,
+                'indicators': self._extract_indicators(doc),
+                'file_path': str(file_path),
+                'status': 'processed',
+                'modifications': []
+            }
+            
+            # Apply necessary transformations while preserving context
+            processed_result.update(self._apply_transformations(doc))
+            
+            # Validate the processed result maintains all required information
+            self._validate_processed_result(processed_result)
+            
+            return processed_result
+            
+        except Exception as e:
+            self.logger.error(f"Processing failed for {file_path}: {str(e)}")
+            return {
+                'status': 'failed',
+                'error': str(e),
+                'file_path': str(file_path)
+            }
+
+    def _extract_indicators(self, doc) -> Dict:
+        """Extract all relevant indicators from the document"""
+        indicators = {
+            'invoice_related': [],
+            'dates': [],
+            'amounts': [],
+            'reference_numbers': [],
+            'custom_fields': []
+        }
+        
+        # Extract and preserve all indicators
+        for page in doc.pages:
+            page_content = page.extract_text()
+            
+            # Preserve invoice-related indicators
+            indicators['invoice_related'].extend(
+                self._find_invoice_indicators(page_content)
+            )
+            
+            # Preserve dates
+            indicators['dates'].extend(
+                self._extract_dates(page_content)
+            )
+            
+            # Preserve amounts and currency information
+            indicators['amounts'].extend(
+                self._extract_amounts(page_content)
+            )
+            
+            # Preserve reference numbers
+            indicators['reference_numbers'].extend(
+                self._extract_references(page_content)
+            )
+            
+            # Preserve any custom fields
+            indicators['custom_fields'].extend(
+                self._extract_custom_fields(page_content)
+            )
+            
+        return indicators
+
+    def _validate_processed_result(self, result: Dict) -> None:
+        """Ensure all important indicators are preserved in the result"""
+        required_keys = {'text', 'indicators', 'status'}
+        if not all(key in result for key in required_keys):
+            raise ValueError("Processed result missing required information")
+            
+        if not result['indicators']:
+            self.logger.warning("No indicators found in processed document")
+
+    def _extract_text_with_formatting(self, doc) -> str:
+        """Extract text while preserving formatting and structure"""
+        formatted_text = []
+        for page in doc.pages:
+            # Extract text with position information
+            elements = page.extract_text_with_formatting()
+            
+            # Preserve layout and structure
+            formatted_text.extend(self._preserve_layout(elements))
+            
+        return '\n'.join(formatted_text)
+
+    def _preserve_layout(self, elements: List) -> List[str]:
+        """Preserve document layout and structure"""
+        # Sort elements by position to maintain layout
+        sorted_elements = sorted(elements, key=lambda x: (-x['top'], x['left']))
+        
+        # Group elements by lines while preserving structure
+        lines = self._group_elements_by_line(sorted_elements)
+        
+        return [' '.join(line) for line in lines]
+
+
 
 
 

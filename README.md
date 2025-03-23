@@ -47,7 +47,8 @@ graph LR
 | Phase 2: Invoice Classification | ✅ Complete | ![100%](https://progress-bar.dev/100?color=34D058) |
 | Phase 3: Data Extraction | 🚧 In Progress | ![60%](https://progress-bar.dev/60?color=F7B731) |
 | Phase 4: API Development | 🚧 In Progress | ![40%](https://progress-bar.dev/40?color=F7B731) |
-| Phase 5: UI Development | ⏳ Planned | ![0%](https://progress-bar.dev/0?color=E74C3C) |
+| Phase 5: Email Automation | 🚧 In Progress | ![20%](https://progress-bar.dev/20?color=F7B731) |
+| Phase 6: UI Development | ⏳ Planned | ![0%](https://progress-bar.dev/0?color=E74C3C) |
 
 </div>
 

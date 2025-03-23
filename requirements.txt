@@ -7,10 +7,14 @@ pandas==2.0.3
 python-dotenv==1.0.0
 pytest>=8.3.5
 pytest-cov>=6.0.0
-pypdf>=3.0.0  # Instead of PyPDF2
+pypdf>=3.0.0
 python-dateutil>=2.8.2
 python-magic>=0.4.27
-pdfplumber>=0.7.0
 numpy>=1.21.0
 scikit-learn>=1.0.0
 spacy>=3.0.0
+fastapi>=0.68.0
+uvicorn>=0.15.0
+python-multipart>=0.0.5
+aiofiles>=0.7.0
+python-dotenv>=0.19.0

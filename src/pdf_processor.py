@@ -17,8 +17,10 @@ class PDFProcessor:
         self.validator = InvoiceValidator()
         self.categorizer = Categorizer()
         
-        # Configure tesseract path
-        pytesseract.pytesseract.tesseract_cmd = tesseract_path or r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+        # Store tesseract_path as instance variable
+        self.tesseract_path = tesseract_path or r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+        # Configure tesseract
+        pytesseract.pytesseract.tesseract_cmd = self.tesseract_path
 
     def extract_invoice_data(self, file_path: str) -> Dict:
         """
