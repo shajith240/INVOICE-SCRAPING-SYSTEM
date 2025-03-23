@@ -1,0 +1,11 @@
+{    "email": "your_email@example.com",
+    "imap_server": "imap.gmail.com",    "folder": "INBOX",
+    "attachment_types": [".pdf"],    "search_criteria": {
+        "subject_contains": ["invoice", "receipt"],        "from_addresses": []
+    }
+}
+
+
+
+
+

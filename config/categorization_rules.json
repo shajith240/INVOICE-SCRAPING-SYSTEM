@@ -1,0 +1,67 @@
+{
+    "base_directory": "documents",
+    "default_directory": "documents/uncategorized",
+    "default_structure": ["{year}", "{month}", "{category}"],
+    
+    "categories": {
+        "invoice": {
+            "required_keywords": [
+                "invoice",
+                "bill to",
+                "payment due",
+                "total amount"
+            ],
+            "optional_keywords": [
+                "tax",
+                "subtotal",
+                "invoice number",
+                "due date"
+            ]
+        },
+        "receipt": {
+            "required_keywords": [
+                "receipt",
+                "total",
+                "paid"
+            ],
+            "optional_keywords": [
+                "cash",
+                "credit card",
+                "transaction",
+                "change"
+            ]
+        },
+        "statement": {
+            "required_keywords": [
+                "statement",
+                "balance",
+                "period"
+            ],
+            "optional_keywords": [
+                "beginning balance",
+                "ending balance",
+                "transactions"
+            ]
+        }
+    },
+
+    "data_extraction": {
+        "invoice": {
+            "invoice_number": "(?:invoice|document)\\s*(?:#|number|num|no)?[:\\s]*(\\w+[-\\d]+)",
+            "date": "(?:date|issued)\\s*:?\\s*(\\d{1,2}[-/]\\d{1,2}[-/]\\d{2,4})",
+            "total_amount": "(?:total|amount due|balance due)\\s*:?\\s*[$€£]\\s*(\\d+(?:[.,]\\d{2})?)",
+            "due_date": "(?:due|payment due|pay by)\\s*:?\\s*(\\d{1,2}[-/]\\d{1,2}[-/]\\d{2,4})"
+        },
+        "receipt": {
+            "transaction_id": "(?:transaction|ref|reference)\\s*(?:#|number|num|no)?[:\\s]*(\\w+[-\\d]+)",
+            "date": "(?:date|time)\\s*:?\\s*(\\d{1,2}[-/]\\d{1,2}[-/]\\d{2,4})",
+            "total_amount": "(?:total|amount|sum)\\s*:?\\s*[$€£]\\s*(\\d+(?:[.,]\\d{2})?)"
+        }
+    },
+
+    "directory_structure": {
+        "invoice": ["{year}", "{month}", "invoices", "{vendor}"],
+        "receipt": ["{year}", "{month}", "receipts"],
+        "statement": ["{year}", "{month}", "statements", "{institution}"]
+    }
+}

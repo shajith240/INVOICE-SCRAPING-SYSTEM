@@ -1,0 +1,23 @@
+# Environment
+.env
+venv/
+__pycache__/
+
+# Data
+data/raw_invoices/*
+data/processed_data/*
+!data/raw_invoices/.gitkeep
+!data/processed_data/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+

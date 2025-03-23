@@ -1,0 +1,25 @@
+{
+    "supported_extensions": [
+        ".pdf",
+        ".tiff",
+        ".tif",
+        ".jpg",
+        ".jpeg",
+        ".png"
+    ],
+    "max_file_size_mb": 50,
+    "processing_records_path": "data/processing_records",
+    "error_directory": "data/errors",
+    "backup_directory": "data/backups",
+    "processing_options": {
+        "create_backup": true,
+        "validate_content": true,
+        "extract_metadata": true,
+        "compress_files": false
+    },
+    "notification": {
+        "enabled": true,
+        "error_threshold": 5,
+        "notify_on_completion": true
+    }
+}
