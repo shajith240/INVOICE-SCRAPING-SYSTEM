@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Build](https://img.shields.io/badge/Build-Passing-brightgreen)
-![Coverage](https://img.shields.io/badge/Coverage-87%25-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Build Status](https://img.shields.io/github/workflow/status/USERNAME/REPO_NAME/Tests/main)](https://github.com/USERNAME/REPO_NAME/actions)
+[![Code Coverage](https://img.shields.io/codecov/c/github/USERNAME/REPO_NAME/main)](https://codecov.io/gh/USERNAME/REPO_NAME)
+[![License](https://img.shields.io/github/license/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/releases)
 
 </div>
 
@@ -14,85 +14,101 @@ An intelligent document processing system that categorizes and extracts informat
 
 ## 🎯 Project Overview
 
-This system automates the extraction and categorization of information from various document types, significantly reducing manual processing time and improving accuracy.
+This system automates the extraction and categorization of information from various document types, significantly reducing manual processing time and improving accuracy. It supports multiple document formats and provides a robust API for integration.
 
 ## 📊 Project Status
 
+<div align="center">
+
 | Phase | Status | Progress |
-|-------|--------|-----------|
-| Phase 1: Document Ingestion | ✅ Complete | ![Progress](https://progress-bar.dev/100) |
-| Phase 2: Document Classification | ✅ Complete | ![Progress](https://progress-bar.dev/100) |
-| Phase 3: Data Extraction | 🚧 In Progress | ![Progress](https://progress-bar.dev/60) |
-| Phase 4: API Development | 🚧 In Progress | ![Progress](https://progress-bar.dev/40) |
-| Phase 5: UI Development | ⏳ Planned | ![Progress](https://progress-bar.dev/0) |
+|:------|:------:|:--------:|
+| Phase 1: Document Ingestion | ✅ Complete | ![100%](https://progress-bar.dev/100) |
+| Phase 2: Document Classification | ✅ Complete | ![100%](https://progress-bar.dev/100) |
+| Phase 3: Data Extraction | 🚧 In Progress | ![60%](https://progress-bar.dev/60) |
+| Phase 4: API Development | 🚧 In Progress | ![40%](https://progress-bar.dev/40) |
+| Phase 5: UI Development | ⏳ Planned | ![0%](https://progress-bar.dev/0) |
+
+</div>
 
 ## 📋 Project Phases
 
-### Phase 1: Document Ingestion
-- ✅ Multi-format document support (PDF, DOCX, Images)
-- ✅ Document validation and sanitization
-- ✅ Initial preprocessing pipeline
-- ✅ Document storage and management
+<details>
+<summary><b>Phase 1: Document Ingestion</b> ✅</summary>
 
-### Phase 2: Document Classification
-- ✅ ML-based document type classification
-- ✅ Document structure analysis
-- ✅ Metadata extraction
-- ✅ Classification accuracy metrics
+- Multi-format document support (PDF, DOCX, Images)
+- Document validation and sanitization
+- Initial preprocessing pipeline
+- Document storage and management
+</details>
 
-### Phase 3: Data Extraction
+<details>
+<summary><b>Phase 2: Document Classification</b> ✅</summary>
+
+- ML-based document type classification
+- Document structure analysis
+- Metadata extraction
+- Classification accuracy metrics
+</details>
+
+<details>
+<summary><b>Phase 3: Data Extraction</b> 🚧</summary>
+
 - ✅ Text extraction and processing
 - ✅ Named Entity Recognition (NER)
 - 🚧 Table extraction and processing
 - ⏳ Form field detection and extraction
+</details>
 
-### Phase 4: API Development
+<details>
+<summary><b>Phase 4: API Development</b> 🚧</summary>
+
 - ✅ Core API endpoints
 - 🚧 Authentication and authorization
 - 🚧 Rate limiting and security
 - ⏳ API documentation
+</details>
 
-### Phase 5: UI Development
-- ⏳ Dashboard design
-- ⏳ Document upload interface
-- ⏳ Processing status monitoring
-- ⏳ Results visualization
+<details>
+<summary><b>Phase 5: UI Development</b> ⏳</summary>
+
+- Dashboard design
+- Document upload interface
+- Processing status monitoring
+- Results visualization
+</details>
 
 ## 📈 Performance Metrics
 
-```mermaid
-pie title Document Processing Success Rate
-    "Successful" : 87
-    "Partial Success" : 10
-    "Failed" : 3
-```
+<div align="center">
 
-```mermaid
-gantt
-    title Project Timeline
-    dateFormat  YYYY-MM-DD
-    section Phase 1
-    Document Ingestion    :done,    des1, 2023-09-01, 2023-09-30
-    section Phase 2
-    Classification        :done,    des2, 2023-10-01, 2023-10-31
-    section Phase 3
-    Data Extraction      :active,  des3, 2023-11-01, 2024-01-31
-    section Phase 4
-    API Development      :active,  des4, 2023-12-01, 2024-02-28
-    section Phase 5
-    UI Development       :         des5, 2024-03-01, 2024-04-30
-```
+### Document Processing Success Rate
 
-## 🚀 Features
+| Status | Percentage |
+|:-------|:----------:|
+| ✅ Successful | 87% |
+| ⚠️ Partial Success | 10% |
+| ❌ Failed | 3% |
 
-- Automatic document categorization
-- Data extraction based on document type
-- Support for multiple document formats
-- Metadata extraction and processing
-- Configurable processing pipeline
-- Error handling and logging
-- Real-time processing status
-- Batch processing capabilities
+### Test Coverage
+
+| Module | Coverage |
+|:-------|:--------:|
+| Document Ingestion | ![95%](https://progress-bar.dev/95) |
+| Classification | ![90%](https://progress-bar.dev/90) |
+| Data Extraction | ![85%](https://progress-bar.dev/85) |
+| API | ![80%](https://progress-bar.dev/80) |
+
+</div>
+
+## 🚀 Key Features
+
+- 📄 Multi-format document support
+- 🤖 Automatic document categorization
+- 📊 Intelligent data extraction
+- 🔄 Configurable processing pipeline
+- 📝 Detailed logging and error handling
+- 🔄 Real-time processing status
+- 📦 Batch processing capabilities
 
 ## ⚙️ Installation
 
@@ -105,7 +121,10 @@ cd REPO_NAME
 2. Create and activate virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# For Windows
+venv\Scripts\activate
+# For macOS/Linux
+source venv/bin/activate
 ```
 
 3. Install dependencies:
@@ -113,12 +132,12 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## 💻 Usage
+## 💻 Quick Start
 
 ```python
 from src.document_processor import DocumentProcessor
 
-# Initialize processor with config
+# Initialize processor
 processor = DocumentProcessor('config.json')
 
 # Process single document
@@ -131,27 +150,20 @@ results = processor.process_batch('path/to/document/directory')
 ## 🧪 Testing
 
 Run the test suite:
-
 ```bash
-python -m pytest tests/
+python -m pytest tests/ --cov=src
 ```
 
-Current test coverage:
+## 📚 Documentation
 
-| Module | Coverage |
-|--------|-----------|
-| Document Ingestion | ![Coverage](https://progress-bar.dev/95) |
-| Classification | ![Coverage](https://progress-bar.dev/90) |
-| Data Extraction | ![Coverage](https://progress-bar.dev/85) |
-| API | ![Coverage](https://progress-bar.dev/80) |
-
-## 📝 Documentation
-
-Detailed documentation is available in the [Wiki](https://github.com/USERNAME/REPO_NAME/wiki)
+- [API Documentation](https://github.com/USERNAME/REPO_NAME/wiki/API-Documentation)
+- [User Guide](https://github.com/USERNAME/REPO_NAME/wiki/User-Guide)
+- [Contributing Guidelines](https://github.com/USERNAME/REPO_NAME/blob/main/CONTRIBUTING.md)
+- [Change Log](https://github.com/USERNAME/REPO_NAME/blob/main/CHANGELOG.md)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on how to submit pull requests.
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ## 📄 License
 
@@ -159,12 +171,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Project Statistics
 
-![Activity](https://img.shields.io/github/commit-activity/m/USERNAME/REPO_NAME)
-![Issues](https://img.shields.io/github/issues/USERNAME/REPO_NAME)
-![Pull Requests](https://img.shields.io/github/issues-pr/USERNAME/REPO_NAME)
-![Contributors](https://img.shields.io/github/contributors/USERNAME/REPO_NAME)
+<div align="center">
+
+[![Activity](https://img.shields.io/github/commit-activity/m/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/commits/main)
+[![Issues](https://img.shields.io/github/issues/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/pulls)
+[![Contributors](https://img.shields.io/github/contributors/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/graphs/contributors)
+
+</div>
 
 ---
+
 <div align="center">
-Made with ❤️ by Your Team Name
-This project is licensed under the MIT License - see the LICENSE file for details.
+<p>Made with ❤️ by Your Team Name</p>
+<p>© 2023 Your Organization. All rights reserved.</p>
+</div>
