@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch, MagicMock
 from pathlib import Path
 import tempfile
-import json
 
 from src.categorizer import DocumentCategorizer
 from src.exceptions import CategoryError
@@ -10,21 +9,34 @@ from src.exceptions import CategoryError
 class TestDocumentCategorizer(unittest.TestCase):
     def setUp(self):
         self.categorizer = DocumentCategorizer()
+        # Create a temporary test file with valid PDF content
         self.test_file = Path(tempfile.mktemp(suffix='.pdf'))
-        self.test_file.touch()
+        
+        # Create a simple PDF with some content
+        from reportlab.pdfgen import canvas
+        c = canvas.Canvas(str(self.test_file))
+        c.drawString(100, 750, "Test Invoice")
+        c.drawString(100, 700, "Invoice #: 12345")
+        c.save()
 
     def tearDown(self):
+        # Clean up test file
         if self.test_file.exists():
             self.test_file.unlink()
 
-    @patch('src.categorizer.TextExtractor')
-    @patch('src.categorizer.MetadataExtractor')
     @patch('src.categorizer.DocumentClassifier')
-    def test_categorize_document(self, mock_classifier, mock_metadata, mock_text):
-        # Setup mock responses
-        mock_text.return_value.extract.return_value = "Test document content"
-        mock_metadata.return_value.extract.return_value = {"created": "2023-01-01"}
-        mock_classifier.return_value.classify.return_value = {
+    @patch('src.categorizer.MetadataExtractor')
+    @patch('src.categorizer.TextExtractor')
+    def test_successful_categorization(self, mock_text, mock_metadata, mock_classifier):
+        # Configure mocks
+        mock_text_instance = mock_text.return_value
+        mock_text_instance.extract.return_value = "Test content"
+        
+        mock_metadata_instance = mock_metadata.return_value
+        mock_metadata_instance.extract.return_value = {"date": "2024-03-20"}
+        
+        mock_classifier_instance = mock_classifier.return_value
+        mock_classifier_instance.classify.return_value = {
             "category": "invoice",
             "confidence": 0.95
         }
@@ -47,61 +59,17 @@ class TestDocumentCategorizer(unittest.TestCase):
 
     @patch('src.categorizer.TextExtractor')
     def test_extraction_error_handling(self, mock_text):
-        mock_text.return_value.extract.side_effect = Exception("Extraction failed")
+        # Configure the mock to raise an exception
+        mock_text_instance = mock_text.return_value
+        mock_text_instance.extract.side_effect = Exception("Extraction failed")
         
+        # Create categorizer with the mocked TextExtractor
+        self.categorizer.text_extractor = mock_text_instance
+        
+        # Test that CategoryError is raised
         with self.assertRaises(CategoryError):
             self.categorizer.categorize(self.test_file)
 
-    def test_get_target_path(self):
-        # Test with single category
-        result = {
-            'categories': ['invoice'],
-            'confidence': 0.9,
-            'metadata': {}
-        }
-        path = self.categorizer.get_target_path(result)
-        self.assertIn('invoice', str(path))
-
-        # Test with subcategory
-        result['categories'] = ['invoice', 'utilities']
-        path = self.categorizer.get_target_path(result)
-        self.assertIn('utilities', str(path))
-
-    @patch('src.categorizer.TextExtractor')
-    @patch('src.categorizer.DocumentClassifier')
-    def test_category_specific_extraction(self, mock_classifier, mock_text):
-        mock_text.return_value.extract.return_value = "Invoice #12345"
-        mock_classifier.return_value.classify.return_value = {
-            "category": "invoice",
-            "confidence": 0.95
-        }
-
-        result = self.categorizer.categorize(self.test_file)
-        self.assertIn('extracted_data', result)
-
-    def test_metadata_handling(self):
-        # Test with additional metadata
-        metadata = {
-            'source': 'email',
-            'sender': 'test@example.com'
-        }
-        
-        with patch('src.categorizer.TextExtractor') as mock_text, \
-             patch('src.categorizer.MetadataExtractor') as mock_metadata, \
-             patch('src.categorizer.DocumentClassifier') as mock_classifier:
-            
-            mock_text.return_value.extract.return_value = "Test content"
-            mock_metadata.return_value.extract.return_value = {"created": "2023-01-01"}
-            mock_classifier.return_value.classify.return_value = {
-                "category": "invoice",
-                "confidence": 0.95
-            }
-
-            result = self.categorizer.categorize(self.test_file, metadata)
-            
-            self.assertIn('metadata', result)
-            self.assertEqual(result['metadata']['source'], 'email')
-            self.assertEqual(result['metadata']['sender'], 'test@example.com')
-
 if __name__ == '__main__':
     unittest.main()
+

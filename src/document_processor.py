@@ -9,10 +9,30 @@ from .categorizer import DocumentCategorizer
 from .exceptions import ProcessingError
 
 class DocumentProcessor:
-    def __init__(self, config_path: Optional[Path] = None):
-        self._load_config(config_path)
-        self._setup_logging()
+    def __init__(self, config: Optional[Dict] = None, config_path: Optional[Path] = None, base_dir: Optional[Path] = None):
+        """
+        Initialize DocumentProcessor
+        
+        Args:
+            config: Optional configuration dictionary
+            config_path: Optional path to configuration file
+            base_dir: Optional base directory for processed documents and errors
+        """
+        if config:
+            self.config = config
+        else:
+            self._load_config(config_path)
+        
+        self.logger = logging.getLogger(__name__)
         self.categorizer = DocumentCategorizer()
+        # Use provided base_dir or default to current directory
+        self.base_dir = Path(base_dir) if base_dir else Path.cwd()
+        # Initialize directories as absolute paths
+        self.processed_dir = self.base_dir / "processed_documents"
+        self.error_dir = self.base_dir / "errors"
+        # Create necessary directories
+        self.processed_dir.mkdir(parents=True, exist_ok=True)
+        self.error_dir.mkdir(parents=True, exist_ok=True)
 
     def _setup_logging(self):
         """Setup logging configuration"""
@@ -59,7 +79,7 @@ class DocumentProcessor:
             categorization_result = self.categorizer.categorize(file_path, metadata)
             
             # Determine target location
-            target_path = self.categorizer.get_target_path(categorization_result)
+            target_path = self.get_target_path(categorization_result)
             
             # Create target directory if it doesn't exist
             target_path.parent.mkdir(parents=True, exist_ok=True)
@@ -85,15 +105,7 @@ class DocumentProcessor:
             raise
 
     def process_batch(self, directory: Path) -> List[Dict]:
-        """
-        Process all documents in a directory
-        
-        Args:
-            directory: Path to directory containing documents
-            
-        Returns:
-            List of processing results
-        """
+        """Process all documents in a directory"""
         results = []
         for file_path in self._get_processable_files(directory):
             try:
@@ -101,6 +113,7 @@ class DocumentProcessor:
                 results.append(result)
             except Exception as e:
                 self.logger.error(f"Failed to process {file_path}: {str(e)}")
+                self._handle_processing_error(file_path, str(e))
                 continue
         return results
 
@@ -138,6 +151,8 @@ class DocumentProcessor:
     def _move_file(self, source: Path, destination: Path):
         """Move file to target location"""
         try:
+            # Ensure destination directory exists
+            destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.move(str(source), str(destination))
         except Exception as e:
             raise ProcessingError(f"Failed to move file to {destination}: {str(e)}")
@@ -197,3 +212,14 @@ class DocumentProcessor:
         for ext in self.config['supported_extensions']:
             files.extend(directory.glob(f"*{ext}"))
         return files
+
+    def get_target_path(self, categorization_result: Dict) -> Path:
+        """Determine target path based on categorization result"""
+        category = categorization_result['categories'][0]
+        date = datetime.now().strftime('%Y-%m-%d')
+        # Use absolute path
+        return self.processed_dir / category / date
+
+
+
+
