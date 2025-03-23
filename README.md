@@ -3,18 +3,18 @@
 <div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![Build Status](https://img.shields.io/github/workflow/status/USERNAME/REPO_NAME/Tests/main)](https://github.com/USERNAME/REPO_NAME/actions)
-[![Code Coverage](https://img.shields.io/codecov/c/github/USERNAME/REPO_NAME/main)](https://codecov.io/gh/USERNAME/REPO_NAME)
-[![License](https://img.shields.io/github/license/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/v/release/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/releases)
+[![Build Status](https://img.shields.io/github/workflow/status/shajith240/INVOICE-SCRAPING-SYSTEM/Tests/main)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/actions)
+[![Code Coverage](https://img.shields.io/codecov/c/github/shajith240/INVOICE-SCRAPING-SYSTEM/main)](https://codecov.io/gh/shajith240/INVOICE-SCRAPING-SYSTEM)
+[![License](https://img.shields.io/github/license/shajith240/INVOICE-SCRAPING-SYSTEM)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/shajith240/INVOICE-SCRAPING-SYSTEM)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/releases)
 
 </div>
 
-An intelligent document processing system that categorizes and extracts information from various document types using advanced machine learning algorithms and natural language processing techniques.
+An intelligent invoice processing system that automatically extracts and categorizes information from various invoice formats using advanced machine learning algorithms and natural language processing techniques.
 
 ## 🎯 Project Overview
 
-This system automates the extraction and categorization of information from various document types, significantly reducing manual processing time and improving accuracy. It supports multiple document formats and provides a robust API for integration.
+This system automates the extraction and categorization of information from invoices, significantly reducing manual processing time and improving accuracy. It supports multiple invoice formats and provides a robust API for integration with existing systems.
 
 ## 📊 Project Status
 
@@ -22,89 +22,19 @@ This system automates the extraction and categorization of information from vari
 
 | Phase | Status | Progress |
 |:------|:------:|:--------:|
-| Phase 1: Document Ingestion | ✅ Complete | ![100%](https://progress-bar.dev/100) |
-| Phase 2: Document Classification | ✅ Complete | ![100%](https://progress-bar.dev/100) |
+| Phase 1: Invoice Ingestion | ✅ Complete | ![100%](https://progress-bar.dev/100) |
+| Phase 2: Invoice Classification | ✅ Complete | ![100%](https://progress-bar.dev/100) |
 | Phase 3: Data Extraction | 🚧 In Progress | ![60%](https://progress-bar.dev/60) |
 | Phase 4: API Development | 🚧 In Progress | ![40%](https://progress-bar.dev/40) |
 | Phase 5: UI Development | ⏳ Planned | ![0%](https://progress-bar.dev/0) |
 
 </div>
 
-## 📋 Project Phases
-
-<details>
-<summary><b>Phase 1: Document Ingestion</b> ✅</summary>
-
-- Multi-format document support (PDF, DOCX, Images)
-- Document validation and sanitization
-- Initial preprocessing pipeline
-- Document storage and management
-</details>
-
-<details>
-<summary><b>Phase 2: Document Classification</b> ✅</summary>
-
-- ML-based document type classification
-- Document structure analysis
-- Metadata extraction
-- Classification accuracy metrics
-</details>
-
-<details>
-<summary><b>Phase 3: Data Extraction</b> 🚧</summary>
-
-- ✅ Text extraction and processing
-- ✅ Named Entity Recognition (NER)
-- 🚧 Table extraction and processing
-- ⏳ Form field detection and extraction
-</details>
-
-<details>
-<summary><b>Phase 4: API Development</b> 🚧</summary>
-
-- ✅ Core API endpoints
-- 🚧 Authentication and authorization
-- 🚧 Rate limiting and security
-- ⏳ API documentation
-</details>
-
-<details>
-<summary><b>Phase 5: UI Development</b> ⏳</summary>
-
-- Dashboard design
-- Document upload interface
-- Processing status monitoring
-- Results visualization
-</details>
-
-## 📈 Performance Metrics
-
-<div align="center">
-
-### Document Processing Success Rate
-
-| Status | Percentage |
-|:-------|:----------:|
-| ✅ Successful | 87% |
-| ⚠️ Partial Success | 10% |
-| ❌ Failed | 3% |
-
-### Test Coverage
-
-| Module | Coverage |
-|:-------|:--------:|
-| Document Ingestion | ![95%](https://progress-bar.dev/95) |
-| Classification | ![90%](https://progress-bar.dev/90) |
-| Data Extraction | ![85%](https://progress-bar.dev/85) |
-| API | ![80%](https://progress-bar.dev/80) |
-
-</div>
-
 ## 🚀 Key Features
 
-- 📄 Multi-format document support
-- 🤖 Automatic document categorization
-- 📊 Intelligent data extraction
+- 📄 Support for multiple invoice formats (PDF, Images, Scanned documents)
+- 🤖 Automatic invoice categorization and validation
+- 📊 Intelligent data extraction (amounts, dates, vendor details)
 - 🔄 Configurable processing pipeline
 - 📝 Detailed logging and error handling
 - 🔄 Real-time processing status
@@ -114,8 +44,8 @@ This system automates the extraction and categorization of information from vari
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/USERNAME/REPO_NAME.git
-cd REPO_NAME
+git clone https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM.git
+cd INVOICE-SCRAPING-SYSTEM
 ```
 
 2. Create and activate virtual environment:
@@ -135,16 +65,16 @@ pip install -r requirements.txt
 ## 💻 Quick Start
 
 ```python
-from src.document_processor import DocumentProcessor
+from src.invoice_processor import InvoiceProcessor
 
 # Initialize processor
-processor = DocumentProcessor('config.json')
+processor = InvoiceProcessor('config.json')
 
-# Process single document
-result = processor.process_document('path/to/document.pdf')
+# Process single invoice
+result = processor.process_invoice('path/to/invoice.pdf')
 
-# Process batch of documents
-results = processor.process_batch('path/to/document/directory')
+# Process batch of invoices
+results = processor.process_batch('path/to/invoice/directory')
 ```
 
 ## 🧪 Testing
@@ -156,10 +86,10 @@ python -m pytest tests/ --cov=src
 
 ## 📚 Documentation
 
-- [API Documentation](https://github.com/USERNAME/REPO_NAME/wiki/API-Documentation)
-- [User Guide](https://github.com/USERNAME/REPO_NAME/wiki/User-Guide)
-- [Contributing Guidelines](https://github.com/USERNAME/REPO_NAME/blob/main/CONTRIBUTING.md)
-- [Change Log](https://github.com/USERNAME/REPO_NAME/blob/main/CHANGELOG.md)
+- [API Documentation](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/wiki/API-Documentation)
+- [User Guide](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/wiki/User-Guide)
+- [Contributing Guidelines](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/blob/main/CONTRIBUTING.md)
+- [Change Log](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/blob/main/CHANGELOG.md)
 
 ## 🤝 Contributing
 
@@ -173,16 +103,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-[![Activity](https://img.shields.io/github/commit-activity/m/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/commits/main)
-[![Issues](https://img.shields.io/github/issues/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/pulls)
-[![Contributors](https://img.shields.io/github/contributors/USERNAME/REPO_NAME)](https://github.com/USERNAME/REPO_NAME/graphs/contributors)
+[![Activity](https://img.shields.io/github/commit-activity/m/shajith240/INVOICE-SCRAPING-SYSTEM)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/commits/main)
+[![Issues](https://img.shields.io/github/issues/shajith240/INVOICE-SCRAPING-SYSTEM)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/shajith240/INVOICE-SCRAPING-SYSTEM)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/pulls)
+[![Contributors](https://img.shields.io/github/contributors/shajith240/INVOICE-SCRAPING-SYSTEM)](https://github.com/shajith240/INVOICE-SCRAPING-SYSTEM/graphs/contributors)
 
 </div>
 
 ---
 
 <div align="center">
-<p>Made with ❤️ by Your Team Name</p>
-<p>© 2023 Your Organization. All rights reserved.</p>
+<p>Made with ❤️ by Shajith</p>
+<p>© 2024 All rights reserved.</p>
 </div>
